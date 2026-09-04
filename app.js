@@ -31,7 +31,7 @@
     { key:'iworq-14', service:'iworq', id:14, group:'Additional infrastructure', name:'Major drainage structures', color:'#7c2d12', shape:'point', visible:true, network:true },
 
     { key:'context-28', service:'context', id:28, group:'Planning context', name:'Hydrology / water bodies', color:'#5da9d6', shape:'polygon', visible:false, network:false },
-    { key:'context-33', service:'context', id:33, group:'Planning context', name:'Major drainage basins', color:'#59636b', shape:'polygon', visible:true, network:false, dashed:true }
+    { key:'context-33', service:'context', id:33, group:'Planning context', name:'Major drainage basins', color:'#59636b', shape:'polygon', visible:false, network:false, dashed:true }
   ];
 
   const state = {
@@ -99,7 +99,7 @@
       weight: config.shape === 'line' ? 4 : config.dashed ? 2 : 2,
       opacity: config.shape === 'polygon' ? .75 : .94,
       fillColor: config.color,
-      fillOpacity: config.shape === 'polygon' ? (config.dashed ? .03 : .20) : .72,
+      fillOpacity: config.shape === 'polygon' ? (config.dashed ? .015 : .10) : .72,
       dashArray: config.dashed ? '8 6' : null
     };
   }
@@ -178,6 +178,7 @@
     state.cityBoundaryFeature = belle;
     state.cityBounds = boundaryLayer.getBounds();
     state.map.fitBounds(state.cityBounds.pad(.03));
+    window.setTimeout(() => state.map.invalidateSize(), 100);
   }
 
   function envelopeFromBounds(bounds) {
